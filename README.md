@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lil cây xin chào</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap');
+
+  :root{
+    --bg: #0B3B36;
+    --paper: #F4EFE2;
+    --paper-dim: #E9E2CF;
+    --ink: #21301F;
+    --ink-soft: #56604F;
+    --sage: #7F9873;
+    --sage-dark: #4F6A47;
+    --gold: #B98A21;
+    --gold-deep: #7A5A12;
+    --line: rgba(33,48,31,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--paper);
+    font-family:'Inter', sans-serif;
+    font-size: 17px;
+    padding: 32px 16px 64px;
+  }
+  .wrap{ max-width: 640px; margin: 0 auto; }
+
+  .masthead{
+    text-align:center;
+    padding: 8px 0 28px;
+    border-bottom: 1px solid rgba(244,239,226,0.18);
+    margin-bottom: 28px;
+  }
+  .masthead .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0 0 8px;
+  }
+  .plant-name{
+    font-family:'Fraunces', serif;
+    font-weight: 600;
+    font-size: 44px;
+    margin: 0;
+    cursor: text;
+    outline: none;
+    line-height:1.2;
+  }
+  .plant-name:empty:before{ content:"Tên cây của bạn"; color: rgba(244,239,226,0.4); }
+  .sub-row{
+    display:flex; justify-content:center; gap:22px; margin-top:14px;
+    font-family:'IBM Plex Mono', monospace; font-size:14px; color: rgba(244,239,226,0.65);
+  }
+  .sub-row b{ color:#fff; font-weight:500; }
+  .sub-row input[type="date"]{
+    background:transparent; border:none; color:inherit; font-family:inherit; font-size:inherit; padding:0; width:110px; margin-left: 6px;
+  }
+
+  .panel{
+    background: var(--paper);
+    border-radius: 14px;
+    padding: 22px 22px 20px;
+    color: var(--ink);
+  }
+
+  form.entry-form{ display:flex; flex-direction:column; gap:12px; }
+  .drop{
+    border: 1.5px dashed rgba(33,48,31,0.3);
+    border-radius: 10px;
+    padding: 18px;
+    text-align:center;
+    cursor:pointer;
+    font-size: 13px;
+    color: var(--ink-soft);
+    position:relative;
+    overflow:hidden;
+    transition: border-color .15s;
+  }
+  .drop:hover{ border-color: var(--sage-dark); }
+  .drop.has-img{ padding: 14px 0; border-style:solid; display:flex; justify-content:center; }
+  .drop img{ display:block; width: 55%; max-width: 220px; aspect-ratio: 3 / 4; object-fit:cover; border-radius: 8px; }
+  .drop input[type=file]{ position:absolute; inset:0; opacity:0; cursor:pointer; }
+
+  .row2{ display:flex; gap:10px; }
+  .row2 > div{ flex:1; display:flex; flex-direction:column; gap:4px; }
+  label.field-label{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color: var(--ink-soft);
+  }
+  input[type="date"].field, input[type="number"].field{
+    border:1px solid var(--line); border-radius:7px; padding:7px 9px; font-family:'IBM Plex Mono', monospace; font-size:13px; background:#fff; color:var(--ink);
+  }
+  textarea{
+    border:1px solid var(--line); border-radius:7px; padding:9px 10px; font-family:'Inter',sans-serif; font-size:13.5px; resize:vertical; min-height:52px; color:var(--ink); background:#fff;
+  }
+  button.save-btn{
+    align-self:flex-end;
+    background: var(--sage-dark); color:#fff; border:none; border-radius:7px; padding:9px 18px;
+    font-family:'Inter',sans-serif; font-weight:500; font-size:13.5px; cursor:pointer;
+  }
+  button.save-btn:disabled{ opacity:.5; cursor:default; }
+  button.save-btn:hover:not(:disabled){ background:#3f5638; }
+
+  .timeline{ margin-top: 30px; position:relative; }
+  .vine{
+    position:absolute; left: 17px; top: 6px; bottom: 6px; width: 2px;
+    background: linear-gradient(var(--sage), var(--paper-dim));
+  }
+  .entry{
+    position:relative; padding-left: 46px; margin-bottom: 26px;
+  }
+  .leaf{
+    position:absolute; left: 8px; top: 4px; width: 18px; height: 18px;
+    border-radius: 0 60% 0 60%; background: var(--sage-dark); border:2px solid var(--paper);
+  }
+  .entry-card{
+    background:#fff; border:1px solid var(--line); border-radius:10px; overflow:hidden;
+    display:flex; gap:14px; align-items:flex-start; padding: 12px;
+  }
+  .entry-card img{ width: 120px; flex:none; display:block; aspect-ratio: 3 / 4; object-fit:cover; border-radius:7px; }
+  .entry-body{ padding: 2px 0; flex:1; }
+  .entry-date{
+    font-family:'IBM Plex Mono', monospace; font-size:13.5px; color: var(--gold-deep); display:flex; justify-content:space-between; align-items:center;
+  }
+  .entry-note{ font-size:15.5px; margin: 8px 0 0; color: var(--ink); line-height:1.55; }
+  .del-btn{
+    background:none; border:none; color: rgba(33,48,31,0.4); cursor:pointer; font-size:16px; line-height:1; padding:2px;
+  }
+  .del-btn:hover{ color:#a33; }
+
+  .empty{ text-align:center; padding: 30px 10px; color: var(--ink-soft); font-size:13.5px; }
+  .loading{ text-align:center; padding: 40px; color: rgba(244,239,226,0.6); font-family:'IBM Plex Mono',monospace; font-size:13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <p class="eyebrow">Hành trình khôn lớn của</p>
+    <h1 class="plant-name" id="plantName">lil cây</h1>
+    <div class="sub-row">
+      <span>Trồng ngày <input type="date" id="plantedDate"></span>
+      <span id="daysGrowing"><b>0</b> ngày</span>
+      <span id="entryCount"><b>0</b> lần ghi</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <form class="entry-form" id="entryForm">
+      <label class="drop" id="dropZone">
+        <span id="dropText">Chạm để chọn ảnh cây hôm nay</span>
+        <input type="file" accept="image/*" id="photoInput">
+      </label>
+      <div class="row2">
+        <div>
+          <label class="field-label">Ngày chụp</label>
+          <input type="date" class="field" id="entryDate">
+        </div>
+        <div>
+          <label class="field-label">Chiều cao (cm, tuỳ chọn)</label>
+          <input type="number" class="field" id="entryHeight" min="0" step="0.5" placeholder="—">
+        </div>
+      </div>
+      <div>
+        <label class="field-label">Ghi chú</label>
+        <textarea id="entryNote" placeholder="Cây có gì mới hôm nay?"></textarea>
+      </div>
+      <button type="submit" class="save-btn" id="saveBtn" disabled>Lưu vào nhật ký</button>
+    </form>
+  </div>
+
+  <div id="timelineWrap">
+    <div class="loading">Đang tải nhật ký…</div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+let entries = [];
+let pendingImage = null;
+
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+$('entryDate').value = todayStr();
+
+async function loadAll(){
+  try{
+    const info = await window.storage.get('plant-info', true);
+    const data = info ? JSON.parse(info.value) : { name:'lil cây', plantedDate: '2026-05-01' };
+    $('plantedDate').value = data.plantedDate || '2026-05-01';
+  }catch(e){
+    $('plantedDate').value = '2026-05-01';
+  }
+  try{
+    const res = await window.storage.get('entries', true);
+    entries = res ? JSON.parse(res.value) : [];
+  }catch(e){
+    entries = [];
+  }
+  render();
+}
+
+async function savePlantInfo(){
+  const data = { name: $('plantName').textContent.trim(), plantedDate: $('plantedDate').value || todayStr() };
+  try{ await window.storage.set('plant-info', JSON.stringify(data), true); }catch(e){}
+  render();
+}
+$('plantName').addEventListener('blur', savePlantInfo);
+$('plantedDate').addEventListener('change', savePlantInfo);
+
+async function saveEntries(){
+  try{ await window.storage.set('entries', JSON.stringify(entries), true); }catch(e){ console.error(e); }
+}
+
+function compressImage(file){
+  return new Promise((resolve, reject)=>{
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const maxW = 900;
+        const scale = Math.min(1, maxW / img.width);
+        const w = Math.round(img.width * scale);
+        const h = Math.round(img.height * scale);
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', 0.72));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+$('entryForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  if(!pendingImage) return;
+  const btn = $('saveBtn');
+  btn.disabled = true; btn.textContent = 'Đang lưu…';
+  const entry = {
+    id: 'e' + Date.now(),
+    date: $('entryDate').value || todayStr(),
+    note: $('entryNote').value.trim(),
+    height: $('entryHeight').value ? Number($('entryHeight').value) : null,
+    image: pendingImage
+  };
+  entries.push(entry);
+  await saveEntries();
+  pendingImage = null;
+  $('entryForm').reset();
+  $('entryDate').value = todayStr();
+  const dz = $('dropZone');
+  dz.classList.remove('has-img');
+  dz.innerHTML = '<span id="dropText">Chạm để chọn ảnh cây hôm nay</span><input type="file" accept="image/*" id="photoInput">';
+  btn.textContent = 'Lưu vào nhật ký';
+  render();
+  attachPhotoInput();
+});
+
+function attachPhotoInput(){
+  const input = document.getElementById('photoInput');
+  input.addEventListener('change', async (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    $('dropText').textContent = 'Đang xử lý ảnh…';
+    try{
+      pendingImage = await compressImage(file);
+      const dz = $('dropZone');
+      dz.classList.add('has-img');
+      dz.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = pendingImage;
+      dz.appendChild(img);
+      const newInput = document.createElement('input');
+      newInput.type='file'; newInput.accept='image/*'; newInput.id='photoInput';
+      dz.appendChild(newInput);
+      attachPhotoInput();
+      $('saveBtn').disabled = false;
+    }catch(err){
+      $('dropText').textContent = 'Có lỗi khi tải ảnh, thử lại nhé';
+    }
+  });
+}
+
+async function deleteEntry(id){
+  entries = entries.filter(x => x.id !== id);
+  await saveEntries();
+  render();
+}
+window.deleteEntry = deleteEntry;
+
+function daysBetween(a,b){
+  const d1 = new Date(a), d2 = new Date(b);
+  return Math.max(0, Math.round((d2-d1)/(1000*60*60*24)));
+}
+
+function fmtDate(s){
+  const d = new Date(s+'T00:00:00');
+  return d.toLocaleDateString('vi-VN', { day:'2-digit', month:'2-digit', year:'numeric' });
+}
+
+function render(){
+  const planted = $('plantedDate').value || todayStr();
+  $('daysGrowing').innerHTML = '<b>' + daysBetween(planted, todayStr()) + '</b> ngày';
+  $('entryCount').innerHTML = '<b>' + entries.length + '</b> lần ghi';
+
+  const sorted = [...entries].sort((a,b)=> b.date.localeCompare(a.date));
+  const wrap = $('timelineWrap');
+  if(sorted.length === 0){
+    wrap.innerHTML = '<div class="empty">Chưa có ảnh nào. Thêm ảnh đầu tiên để bắt đầu nhật ký.</div>';
+    return;
+  }
+  wrap.innerHTML = '<div class="timeline"><div class="vine"></div>' +
+    sorted.map(en => `
+      <div class="entry">
+        <div class="leaf"></div>
+        <div class="entry-card">
+          <img src="${en.image}" alt="Ảnh cây ngày ${fmtDate(en.date)}">
+          <div class="entry-body">
+            <div class="entry-date">
+              <span>${fmtDate(en.date)}${en.height ? ' · ' + en.height + ' cm' : ''}</span>
+              <button class="del-btn" onclick="deleteEntry('${en.id}')" aria-label="Xoá">✕</button>
+            </div>
+            ${en.note ? `<p class="entry-note">${en.note.replace(/</g,'&lt;')}</p>` : ''}
+          </div>
+        </div>
+      </div>
+    `).join('') + '</div>';
+}
+
+attachPhotoInput();
+loadAll();
+</script>
+</body>
+</html>
