@@ -1,0 +1,133 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="WM-API-SAPECC Flow" id="q56NpianrHi7KKkELW7V">
+    <mxGraphModel dx="4133" dy="1858" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-42" parent="1" style="swimlane;html=1;startSize=30;horizontal=0;fillColor=#f5f5f5;fontSize=16;fontStyle=1;" value="Goods Receipt/Issue Flow - JBS Plant (WM to SAP ECC via API/Middleware)" vertex="1">
+          <mxGeometry height="730" width="4200" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-43" parent="la5KUNT_A-YFZ5Gy_v-z-42" style="swimlane;html=1;horizontal=0;startSize=30;fillColor=#dae8fc;" value="User (Warehouse Staff)" vertex="1">
+          <mxGeometry height="160" width="4200" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-44" parent="la5KUNT_A-YFZ5Gy_v-z-43" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" value="Start: Goods receipt / Goods issue at warehouse" vertex="1">
+          <mxGeometry height="60" width="200" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-45" parent="la5KUNT_A-YFZ5Gy_v-z-43" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" value="Enter transaction data in WM (quantity, storage bin, document type)" vertex="1">
+          <mxGeometry height="60" width="200" x="280" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-46" parent="la5KUNT_A-YFZ5Gy_v-z-43" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" value="Submit transaction" vertex="1">
+          <mxGeometry height="60" width="200" x="520" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-47" parent="la5KUNT_A-YFZ5Gy_v-z-43" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" value="Receive result notification (success / error)" vertex="1">
+          <mxGeometry height="60" width="200" x="3880" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-65" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-43" source="la5KUNT_A-YFZ5Gy_v-z-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-66" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-43" source="la5KUNT_A-YFZ5Gy_v-z-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-48" parent="la5KUNT_A-YFZ5Gy_v-z-42" style="swimlane;html=1;horizontal=0;startSize=30;fillColor=#d5e8d4;" value="WM System" vertex="1">
+          <mxGeometry height="160" width="4200" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-49" parent="la5KUNT_A-YFZ5Gy_v-z-48" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" value="Validate stock level and input data" vertex="1">
+          <mxGeometry height="60" width="200" x="760" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-50" parent="la5KUNT_A-YFZ5Gy_v-z-48" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" value="Generate stock transfer postings:&#xa;N+1 at destination bin&#xa;N-1 at source bin" vertex="1">
+          <mxGeometry height="70" width="200" x="1000" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-51" parent="la5KUNT_A-YFZ5Gy_v-z-48" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" value="Build API payload (JSON/XML)" vertex="1">
+          <mxGeometry height="60" width="200" x="1240" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-52" parent="la5KUNT_A-YFZ5Gy_v-z-48" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" value="Update WM transaction status based on response" vertex="1">
+          <mxGeometry height="60" width="200" x="3640" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-68" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-48" source="la5KUNT_A-YFZ5Gy_v-z-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-69" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-48" source="la5KUNT_A-YFZ5Gy_v-z-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-53" parent="la5KUNT_A-YFZ5Gy_v-z-42" style="swimlane;html=1;horizontal=0;startSize=30;fillColor=#fff2cc;" value="API / Middleware (PI-PO / CPI / Custom API)" vertex="1">
+          <mxGeometry height="220" width="4200" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-54" parent="la5KUNT_A-YFZ5Gy_v-z-53" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" value="Receive request from WM (REST/SOAP)" vertex="1">
+          <mxGeometry height="60" width="200" x="1480" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-55" parent="la5KUNT_A-YFZ5Gy_v-z-53" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" value="Map data to SAP IDoc / BAPI structure" vertex="1">
+          <mxGeometry height="60" width="200" x="1720" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-56" parent="la5KUNT_A-YFZ5Gy_v-z-53" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" value="Call RFC/BAPI or send IDoc to SAP ECC" vertex="1">
+          <mxGeometry height="60" width="200" x="1960" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-57" parent="la5KUNT_A-YFZ5Gy_v-z-53" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;" value="Check response from ECC" vertex="1">
+          <mxGeometry height="80" width="160" x="3160" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-58" parent="la5KUNT_A-YFZ5Gy_v-z-53" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" value="Success: return result to WM" vertex="1">
+          <mxGeometry height="60" width="200" x="3400" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-59" parent="la5KUNT_A-YFZ5Gy_v-z-53" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" value="Error: log, retry / send alert" vertex="1">
+          <mxGeometry height="60" width="200" x="3400" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-71" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-53" source="la5KUNT_A-YFZ5Gy_v-z-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-55">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-72" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-53" source="la5KUNT_A-YFZ5Gy_v-z-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-56">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-78" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-53" source="la5KUNT_A-YFZ5Gy_v-z-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-58" value="OK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-79" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-53" source="la5KUNT_A-YFZ5Gy_v-z-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="la5KUNT_A-YFZ5Gy_v-z-59" value="Error">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-60" parent="la5KUNT_A-YFZ5Gy_v-z-42" style="swimlane;html=1;horizontal=0;startSize=30;fillColor=#e1d5e7;" value="SAP ECC" vertex="1">
+          <mxGeometry height="160" width="4200" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-61" parent="la5KUNT_A-YFZ5Gy_v-z-60" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" value="Receive IDoc / BAPI call (e.g. MB1B, MIGO)" vertex="1">
+          <mxGeometry height="60" width="200" x="2200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-62" parent="la5KUNT_A-YFZ5Gy_v-z-60" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" value="Post stock movement: update N+1 / N-1 in stock table" vertex="1">
+          <mxGeometry height="60" width="200" x="2440" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-63" parent="la5KUNT_A-YFZ5Gy_v-z-60" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" value="Create material document number" vertex="1">
+          <mxGeometry height="60" width="200" x="2680" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-64" parent="la5KUNT_A-YFZ5Gy_v-z-60" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" value="Return status + document number to middleware" vertex="1">
+          <mxGeometry height="60" width="200" x="2920" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-74" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-60" source="la5KUNT_A-YFZ5Gy_v-z-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-62">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-75" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-60" source="la5KUNT_A-YFZ5Gy_v-z-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-63">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-76" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-60" source="la5KUNT_A-YFZ5Gy_v-z-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-64">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-67" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-42" source="la5KUNT_A-YFZ5Gy_v-z-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-70" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-42" source="la5KUNT_A-YFZ5Gy_v-z-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-54">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-73" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-42" source="la5KUNT_A-YFZ5Gy_v-z-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-61">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-77" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-42" source="la5KUNT_A-YFZ5Gy_v-z-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-80" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-42" source="la5KUNT_A-YFZ5Gy_v-z-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-81" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-42" source="la5KUNT_A-YFZ5Gy_v-z-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5KUNT_A-YFZ5Gy_v-z-82" edge="1" parent="la5KUNT_A-YFZ5Gy_v-z-42" source="la5KUNT_A-YFZ5Gy_v-z-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="la5KUNT_A-YFZ5Gy_v-z-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
